@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/tokenbucket.css"/>
+	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/start/jquery-ui.css"/>
+</head>
+<body>
+<div class="demo">
+
+	<div class="portlet ui-widget-content ui-helper-clearfix ui-corner-all" id="portlet-template">
+		<div class="portlet-header ui-widget-header ui-corner-all"><span class='ui-icon ui-icon-minusthick'></span><span class="title">&nbsp;</span></div>
+		<div class="portlet-content"></div>
+	</div>
+
+	<div class="column"></div>
+
+</div>
+
+<script src="js/jquery-1.9.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.js"></script>
+<script src="js/ext/jolokia.js"></script>
+<script src="js/ext/jolokia-simple.js"></script>
+<script src="js/ext/highcharts.src.js"></script>
+<script src="js/index.js"></script>
+
+<script>
+ function failed(e) {
+   // video playback failed - show a message saying why
+   switch (e.target.error.code) {
+     case e.target.error.MEDIA_ERR_ABORTED:
+       alert('You aborted the video playback.');
+       break;
+     case e.target.error.MEDIA_ERR_NETWORK:
+       alert('A network error caused the video download to fail part-way.');
+       break;
+     case e.target.error.MEDIA_ERR_DECODE:
+       alert('The video playback was aborted due to a corruption problem or because the video used features your browser did not support.');
+       break;
+     case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+       alert('The video could not be loaded, either because the server or network failed or because the format is not supported.');
+       break;
+     default:
+       alert('An unknown error occurred.');
+       break;
+   }
+ }
+</script>
+<p><video src="download/Video0062.mp4" autoplay controls onerror="failed(event)"></video></p>
+<p><a href="download/Video0062.mp4">Download the video file</a>.</p>
+</body>
+</html>
