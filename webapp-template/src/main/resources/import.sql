@@ -1,0 +1,2 @@
+-- INSERT INTO user (id, firstName, lastName, password, username, userRole) VALUES (1, 'Admin', '', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'ROLE_ADMIN');
+-- INSERT INTO user (id, firstName, lastName, password, username, userRole) VALUES (2, 'User', '', 'ee11cbb19052e40b07aac0ca060c23ee', 'user', 'ROLE_USER');
