@@ -25,13 +25,14 @@ import dev.gsitgithub.security.UserAuthority;
 
 @Entity //(name = "User")
 @Table(name="USER")
-public class User implements BaseEntity {
+public class User implements BaseEntity, UserDetails {
      
-    @Id
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @Column(name="ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
  
     @Column(name="EMAIL")
     private String email;
@@ -48,7 +49,11 @@ public class User implements BaseEntity {
     @Transient
     private final String PERMISSION_PREFIX = "ROLE_RIGHT_";
     
-    public String getEmail() {
+    public User(String username, String string, boolean b, boolean c, boolean d, boolean e,
+			Collection<? extends GrantedAuthority> authorities) {
+		// TODO Auto-generated constructor stub
+	}
+	public String getEmail() {
         return email;
     }
     public void setEmail(String email) {
@@ -96,4 +101,28 @@ public class User implements BaseEntity {
         }
         return authorities;
     }
+	@Override
+	public String getPassword() {
+		return passwordHash;
+	}
+	@Override
+	public String getUsername() {
+		return email;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }

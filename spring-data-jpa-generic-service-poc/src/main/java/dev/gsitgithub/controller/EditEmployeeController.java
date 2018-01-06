@@ -33,7 +33,7 @@ public class EditEmployeeController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listEmployees(ModelMap map) {
 		map.addAttribute("employee", new Employee());
-		map.addAttribute("employeeList", employeeService.findAll());
+		map.addAttribute("employeeList", employeeService.findMany(0, -1));
 		return "editEmployeeList";
 	}
 
@@ -54,7 +54,7 @@ public class EditEmployeeController {
 		employeeService.delete(e);
 		return "redirect:/list";
 	}
-
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(ModelMap model) {
 		return "login";

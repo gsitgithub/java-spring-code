@@ -2,11 +2,8 @@ package dev.gsitgithub.generic.service;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.hibernate.type.Type;
 
 import dev.gsitgithub.generic.repo.BaseEntity;
 
@@ -18,30 +15,16 @@ public interface GenericService<T extends BaseEntity, ID extends Serializable> {
 	 */
 	public T findById(ID id);
 	
-	public boolean findIfObjectWithIdExists(ID id);
-
-	/** 
-	 * Find previously persisted objects by example instance
-	 */
-
-	public List<T> findByExample(T exampleInstance,
-			Map<String, Object> exclusionProperties, int firstResult, int maxResults);
+	public boolean isExist(ID id);
 
 	/** 
 	 * Search previously persisted objects by a sql query string and query arguments
 	 * The result can be obtained in page manner by using firstResult and maxResults
 	 */
 
-	public List<T> findByQuery(String query, final Object[] queryArgs,
-			int firstResult, int maxResults);
-
-	public List<T> findBySqlQuery(String query, int firstResult, int maxResults);
-
 	/** 
 	 * Find all 
 	 */
-	public List<T> findAll();
-
 	public List<ID> findAllIds(Iterable<ID> idattribute);
 	
 	public List<T> findMany(int firstResult, int maxResults);
@@ -50,19 +33,7 @@ public interface GenericService<T extends BaseEntity, ID extends Serializable> {
 	 */
 	public long getRowCount();
 
-	public long getRowCountByQuery(String query, final Object[] queryArgs);
-	
-	public long getRowCountByExample(T exampleInstance,	Map exclusionProperties);
-
-	public List<HashMap> findScalarBySqlQuery(String query, final Map<String,Object> args, int firstResult, int maxResults);
-	
-	public List<HashMap> findAsScalar(String[] fieldNames, String whereClause, final Map<String,Object> args, int firstResult, int maxResults, boolean sql);
-
-	public List<HashMap> executeSqlQuery(String query, List<String>fields, HashMap<String,Type> propTypes, final Map<String,Object> args, int firstResult, int maxResults);
-
-	public List executeAnyQuery(String query, final Map<String,Object> args, int firstResult, int maxResults, boolean sql);
-	
-	public Map<String,String> findPropertyMap(String keyProperty, String[] otherProps, String whereClause, String delim);
+	public List<T> executeAnyQuery(String query, final Map<String,Object> args, int firstResult, int maxResults, boolean sql);
 	
 	/** Persist the newInstance object into database */
 	public abstract T create(T newInstance);
