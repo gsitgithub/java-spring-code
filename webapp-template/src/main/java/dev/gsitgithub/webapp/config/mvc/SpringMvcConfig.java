@@ -1,13 +1,10 @@
 package dev.gsitgithub.webapp.config.mvc;
 
-import dev.gsitgithub.webapp.config.format.custom.CustomFormatAnnotationFormatterFactory;
-import dev.gsitgithub.webapp.config.format.json.JsonFormatAnnotationFormatterFactory;
-import dev.gsitgithub.webapp.config.format.list.ListFormatAnnotationFormatterFactory;
-import dev.gsitgithub.webapp.config.interceptors.LocaleInterceptor;
-import dev.gsitgithub.webapp.config.interceptors.TimeZoneInterceptor;
-import dev.gsitgithub.webapp.config.logging.ExecutionTimeInterceptor;
-import dev.gsitgithub.webapp.config.utils.ApplicationEnvironmentUtils;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.xml.transform.Source;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,20 +21,24 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManagerFactory;
-import javax.xml.transform.Source;
-import java.util.List;
+import dev.gsitgithub.webapp.config.format.custom.CustomFormatAnnotationFormatterFactory;
+import dev.gsitgithub.webapp.config.format.json.JsonFormatAnnotationFormatterFactory;
+import dev.gsitgithub.webapp.config.format.list.ListFormatAnnotationFormatterFactory;
+import dev.gsitgithub.webapp.config.interceptors.LocaleInterceptor;
+import dev.gsitgithub.webapp.config.interceptors.TimeZoneInterceptor;
+import dev.gsitgithub.webapp.config.logging.ExecutionTimeInterceptor;
+import dev.gsitgithub.webapp.config.utils.ApplicationEnvironmentUtils;
+import lombok.extern.slf4j.Slf4j;
 
 @Configuration
 @Slf4j
@@ -50,8 +51,17 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
     @Value("${application.version}")
     private String version;
     @Inject
-    EntityManagerFactory entityManagerFactory;
+    OpenEntityManagerInViewInterceptor openEntityManagerInViewInterceptor;
 
+    @Bean
+    public CommonsRequestLoggingFilter requestLoggingFilter() {
+        CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
+        loggingFilter.setIncludeClientInfo(true);
+        loggingFilter.setIncludeQueryString(true);
+        loggingFilter.setIncludePayload(true);
+        return loggingFilter;
+    }
+    
     @Bean
     public ExecutionTimeInterceptor executionTimeInterceptor() {
         return new ExecutionTimeInterceptor();
@@ -67,19 +77,13 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
         return new TimeZoneInterceptor("timezone");
     }
 
-    @Bean
-    public OpenEntityManagerInViewInterceptor openEntityManagerInViewInterceptor() {
-        OpenEntityManagerInViewInterceptor openEntityManagerInViewInterceptor = new OpenEntityManagerInViewInterceptor();
-        openEntityManagerInViewInterceptor.setEntityManagerFactory(entityManagerFactory);
-        return openEntityManagerInViewInterceptor;
-    }
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(executionTimeInterceptor());
-        registry.addInterceptor(localeInterceptor());
-        registry.addInterceptor(timeZoneInterceptor());
-        registry.addWebRequestInterceptor(openEntityManagerInViewInterceptor());
+//        registry.addInterceptor(executionTimeInterceptor());
+//        registry.addInterceptor(localeInterceptor());
+//        registry.addInterceptor(timeZoneInterceptor());
+        if (openEntityManagerInViewInterceptor != null)
+        	registry.addWebRequestInterceptor(openEntityManagerInViewInterceptor);
     }
 
     @Override
@@ -139,11 +143,11 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
     @Override
     public void addViewControllers(ViewControllerRegistry registry){
         //registry.addViewController("/").setViewName("index");
-        registry.addViewController("/index.html").setViewName("root");
+//        registry.addViewController("/index.html").setViewName("index");
     }
 
     // TODO: view resolver is not working, try Themeleaf
-    @Bean
+//    @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);

@@ -3,12 +3,15 @@ package dev.gsitgithub.webapp.service;
 import dev.gsitgithub.webapp.entity.User;
 import dev.gsitgithub.webapp.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.joda.time.Period;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+
+import java.time.Duration;
+import java.time.Period;
+import java.time.temporal.TemporalAmount;
 import java.util.List;
 
 @Service
@@ -35,7 +38,7 @@ public class UserService {
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
         if (user.getAutomaticLogoutTime() == null) {
-            user.setAutomaticLogoutTime(Period.hours(1));
+            user.setAutomaticLogoutTime(Duration.ofHours(1));
         }
 
         // create entity

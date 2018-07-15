@@ -3,14 +3,14 @@ package dev.gsitgithub.webapp.entity;
 import dev.gsitgithub.webapp.entity.abstracts.IdEntity;
 import dev.gsitgithub.webapp.entity.enums.Role;
 import lombok.*;
-import org.joda.time.DateTimeZone;
-import org.joda.time.Period;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Duration;
+import java.time.ZoneId;
 import java.util.*;
 
 import static javax.persistence.EnumType.STRING;
@@ -36,18 +36,18 @@ public class User extends IdEntity implements UserDetails, Serializable {
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
     private boolean enabled;
-    private Period automaticLogoutTime;
+    private Duration automaticLogoutTime;
     private Locale locale;
-    private DateTimeZone timeZone;
+    private ZoneId timeZone;
     private String dateFormat = "yyyy/MM/dd";
     private String timeFormat = "HH.mm";
     @ElementCollection(targetClass = Role.class, fetch = EAGER)
     @Enumerated(STRING)
     private Set<Role> userRoles = EnumSet.noneOf(Role.class);
     @ManyToMany(mappedBy = "users", fetch = EAGER)
-    private Set<Group> groups = new HashSet();
+    private Set<Group> groups = new HashSet<Group>();
     @OneToMany(fetch = EAGER)
-    private Set<PreferenceValue> preferenceValues = new HashSet();
+    private Set<PreferenceValue> preferenceValues = new HashSet<PreferenceValue>();
 
     public Set<Role> getRoles() {
         Set<Role> roles = EnumSet.noneOf(Role.class);

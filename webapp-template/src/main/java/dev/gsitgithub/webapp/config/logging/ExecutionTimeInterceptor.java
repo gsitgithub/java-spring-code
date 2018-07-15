@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import static java.lang.System.currentTimeMillis;
-import static dev.gsitgithub.webapp.config.utils.TimeUtils.formatMilliseconds;
+import static dev.gsitgithub.webapp.config.utils.TimeUtils.getDurationBreakdown;
 import static org.apache.commons.lang3.StringUtils.startsWith;
 
 @Slf4j
@@ -33,7 +33,7 @@ public class ExecutionTimeInterceptor extends HandlerInterceptorAdapter {
         // Calculate execution time
         long startTime = (Long) request.getAttribute("startTime");
         long endTime = currentTimeMillis();
-        String executionTime = formatMilliseconds(endTime - startTime);
+        String executionTime = getDurationBreakdown(endTime - startTime);
 
         // Add execution time to model
         modelAndView.addObject("executionTime", executionTime);

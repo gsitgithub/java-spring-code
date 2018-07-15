@@ -1,13 +1,19 @@
 package dev.gsitgithub.webapp.entity;
 
-import dev.gsitgithub.webapp.entity.abstracts.IdEntity;
-import lombok.*;
-import org.joda.time.DateTime;
+import static lombok.AccessLevel.PROTECTED;
+
+import java.time.ZonedDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import static lombok.AccessLevel.PROTECTED;
+import dev.gsitgithub.webapp.entity.abstracts.IdEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @NoArgsConstructor(access = PROTECTED)
@@ -26,6 +32,6 @@ public class RememberMeToken extends IdEntity {
     @Column(length = 64)
     private String token;
     @NonNull
-    private DateTime lastUsed;
+    private ZonedDateTime lastUsed;
 
 }

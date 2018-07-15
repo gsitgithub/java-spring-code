@@ -24,7 +24,8 @@
         </root>
         <logger name="dev.gsitgithub" level="DEBUG" />
         <logger name="org.apache" level="info" />
-        <logger name="org.springframework" level="DEBUG" />
+        <logger name="org.springframework" level="INFO" />
+        <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter" level="DEBUG" />
     </loggers>
 </configuration>
 

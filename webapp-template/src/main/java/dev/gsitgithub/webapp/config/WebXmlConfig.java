@@ -28,13 +28,21 @@ import static org.apache.commons.lang3.StringUtils.join;
 public class WebXmlConfig implements WebApplicationInitializer {
     
     final String TARGET_FOLDER = getClass().getClassLoader().getResource(".").getPath().replaceAll("/classes/$", "");
+    public final static String PROFILE_ALL = "all";
+    public final static String PROFILE_SECURITY = "security";
+    public final static String PROFILE_DB = "db";
+    public final static String PROFILE_METRICS = "metrics";
+    public final static String PROFILE_WEB = "web";
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
+    	
         // Load Application Properties
         String applicationEnvironment = getApplicationEnvironment();
         Properties applicationProperties = loadApplicationProperties(applicationEnvironment);
-
+        // Set init parameter to activate provided profiles
+        setInitParameters(servletContext, applicationProperties);
+        
         // Set Java Melody settings
         servletContext.setInitParameter("javamelody.monitoring-path", "/javamelody");
         servletContext.setInitParameter("javamelody.storage-directory", TARGET_FOLDER + "/logs/javamelody");
@@ -45,7 +53,7 @@ public class WebXmlConfig implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();
         appContext.register(ApplicationConfig.class);
         appContext.setDisplayName(applicationProperties.getProperty("application.name"));
-        appContext.getEnvironment().setActiveProfiles(applicationEnvironment);
+        appContext.getEnvironment().setActiveProfiles(applicationEnvironment, PROFILE_SECURITY);
         log.info("Starting up Application with the following active profiles: " + join(appContext.getEnvironment().getActiveProfiles(), ", "));
 
         // Enable Application Context with Context Loader Listner
@@ -143,6 +151,12 @@ public class WebXmlConfig implements WebApplicationInitializer {
             throw new RuntimeException("Could not read application_" + applicationEnvironment + ".properties file in src/main/resources folder", ex);
         }
         return properties;
+    }
+    
+    private void setInitParameters(ServletContext sc, Properties applicationProperties) {
+    	String key = "spring.profiles.active";
+    	if (applicationProperties.containsKey(key))
+    		sc.setInitParameter(key, applicationProperties.getProperty(key));
     }
 
     private void enableHttpLogbackAccess(ServletContext servletContext){

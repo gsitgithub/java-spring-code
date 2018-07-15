@@ -1,11 +1,12 @@
 package dev.gsitgithub.webapp.config.monitor;
 
-import net.bull.javamelody.MonitoredWithAnnotationPointcut;
-import net.bull.javamelody.MonitoringSpringAdvisor;
-import net.bull.javamelody.SpringDataSourceBeanPostProcessor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import net.bull.javamelody.MonitoredWithAnnotationPointcut;
+import net.bull.javamelody.MonitoringSpringAdvisor;
+import net.bull.javamelody.SpringDataSourceBeanPostProcessor;
 
 @Configuration
 public class JavaMelodyConfig {
