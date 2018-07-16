@@ -1,6 +1,7 @@
 package dev.gsitgithub.webapp.config;
 
 import dev.gsitgithub.webapp.config.logging.MDCInsertingServletFilter;
+import dev.gsitgithub.webapp.config.mvc.SpringMvcConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.h2.server.web.WebServlet;
 import org.jminix.console.servlet.MiniConsoleServlet;
@@ -82,9 +83,9 @@ public class WebXmlConfig implements WebApplicationInitializer {
         mdcInsertingServletFilter.addMappingForUrlPatterns(null, false, "/*");
 
         // Register Spring Security Filter
-        FilterRegistration.Dynamic springSecurityFilterChain =
-                servletContext.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class);
-        springSecurityFilterChain.addMappingForUrlPatterns(null, false, "/*");
+//        FilterRegistration.Dynamic springSecurityFilterChain =
+//                servletContext.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class);
+//        springSecurityFilterChain.addMappingForUrlPatterns(null, false, "/*");
 
 
         // Register UTF-8 Encoding Filter, see http://developers-blog.org/blog/default/2010/08/17/Spring-MVC-and-UTF-8-Encoding-with-CharacterEncodingFilter

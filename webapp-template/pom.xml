@@ -42,7 +42,7 @@
         <developer>
             <id>gsitgithub</id>
             <name>Gsit Developer</name>
-            <email>gsitgithub@ggmail.com</email>
+            <email>gsitgithub@gmail.com</email>
             <roles>
                 <role>author</role>
                 <role>architect</role>
@@ -123,25 +123,25 @@
         <maven.deploy.skip>true</maven.deploy.skip>
 
         <!-- Dependency Versions (run "mvn versions:display-property-updates" to check for updates) -->
-        <javax.servlet.api.version>3.1.0</javax.servlet.api.version>
+        <javax.servlet.api.version>4.0.1</javax.servlet.api.version>
 
         <!-- Test dependencies versions -->
-        <javamelody.version>1.56.0</javamelody.version>
-        <jminix.version>1.1.0</jminix.version>
+        <javamelody.version>1.73.1</javamelody.version>
+        <jminix.version>1.2.0</jminix.version>
         <junit.version>4.12</junit.version>
-        <mockito.core.version>1.10.19</mockito.core.version>
+        <mockito.core.version>2.19.0</mockito.core.version>
         <hamcrest.version>1.3</hamcrest.version>
         <fest.version>2.0M10</fest.version>
 
         <!-- Logging dependencies versions -->
-        <slf4j.version>1.7.12</slf4j.version>
-        <logback.version>1.1.3</logback.version>
-        <logj2.version>2.2</logj2.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <logback.version>1.2.3</logback.version>
+        <logj2.version>2.11.0</logj2.version>
 
         <!-- Spring dependencies -->
-        <spring.version>4.1.6.RELEASE</spring.version>
-        <spring.data.jpa.version>1.8.0.RELEASE</spring.data.jpa.version>
-        <spring.security.version>4.0.1.RELEASE</spring.security.version>
+        <spring.version>5.0.7.RELEASE</spring.version>
+        <spring.data.jpa.version>2.0.8.RELEASE</spring.data.jpa.version>
+        <spring.security.version>5.0.6.RELEASE</spring.security.version>
 
         <!-- HTML page UI-->
         <thymeleaf.extras.data-attribute.version>1.3</thymeleaf.extras.data-attribute.version>
@@ -151,47 +151,47 @@
         <datatables.thymeleaf.version>0.9.3</datatables.thymeleaf.version>
 
         <!-- Database dependencies -->
-        <h2.version>1.4.187</h2.version>
-        <mysql.connector.java.version>5.1.35</mysql.connector.java.version>
-        <hibernate.version>4.3.9.Final</hibernate.version>
-        <hibernate.validator.version>5.1.3.Final</hibernate.validator.version>
-        <joda.time.version>2.7</joda.time.version>
-        <joda.money.version>0.10.0</joda.money.version>
-        <querydsl.version>3.6.3</querydsl.version>
-        <usertype.core.version>3.2.0.GA</usertype.core.version>
+        <h2.version>1.4.197</h2.version>
+        <mysql.connector.java.version>8.0.11</mysql.connector.java.version>
+        <hibernate.version>5.3.2.Final</hibernate.version>
+        <hibernate.validator.version>6.0.10.Final</hibernate.validator.version>
+        <joda.time.version>2.10</joda.time.version>
+        <joda.money.version>0.12</joda.money.version>
+        <querydsl.version>3.7.4</querydsl.version>
+        <usertype.core.version>6.0.1.GA</usertype.core.version>
         <common.dbcp.version>2.1</common.dbcp.version>
-        <hikaricp.version>2.3.7</hikaricp.version>
+        <hikaricp.version>2.3.13</hikaricp.version>
         <hibernate-hikaricp.version>4.3.9.Final</hibernate-hikaricp.version>
 
         <!-- Utilities -->
-        <commons.lang3.version>3.4</commons.lang3.version>
-        <guava.version>18.0</guava.version>
+        <commons.lang3.version>3.7</commons.lang3.version>
+        <guava.version>25.1-jre</guava.version>
 
         <!-- Converters -->
-        <gson.version>2.3.1</gson.version>
+        <gson.version>2.8.5</gson.version>
         <jackson.jaxrs.version>2.5.3</jackson.jaxrs.version>
 
         <!-- Optimizations boilerplate -->
         <lambdaj.version>2.3.3</lambdaj.version>
-        <lombok.version>1.16.4</lombok.version>
+        <lombok.version>1.18.0</lombok.version>
 
         <!-- Plugin Versions (run "mvn versions:display-property-updates" to check for updates) -->
         <apt.plugin.version>1.1.3</apt.plugin.version>
-        <checkstyle.plugin.version>2.12.1</checkstyle.plugin.version>
-        <clean.plugin.version>2.6.1</clean.plugin.version>
-        <compiler.plugin.version>3.3</compiler.plugin.version>
+        <checkstyle.plugin.version>3.0.0</checkstyle.plugin.version>
+        <clean.plugin.version>3.1.0</clean.plugin.version>
+        <compiler.plugin.version>3.7.0</compiler.plugin.version>
         <deploy.plugin.version>2.8.2</deploy.plugin.version>
-        <enforcer.plugin.version>1.4</enforcer.plugin.version>
-        <help.plugin.version>2.2</help.plugin.version>
+        <enforcer.plugin.version>3.0.0-M2</enforcer.plugin.version>
+        <help.plugin.version>3.1.0</help.plugin.version>
         <install.plugin.version>2.5.2</install.plugin.version>
-        <jetty.plugin.version>9.2.1.v20140609</jetty.plugin.version>
-        <properties.plugin.version>1.0-alpha-2</properties.plugin.version>
-        <release.plugin.version>2.5.2</release.plugin.version>
-        <resources.plugin.version>2.7</resources.plugin.version>
-        <surefire.plugin.version>2.18.1</surefire.plugin.version>
+        <jetty.plugin.version>9.4.11.v20180605</jetty.plugin.version>
+        <properties.plugin.version>1.0.0</properties.plugin.version>
+        <release.plugin.version>2.5.3</release.plugin.version>
+        <resources.plugin.version>3.1.0</resources.plugin.version>
+        <surefire.plugin.version>2.22.0</surefire.plugin.version>
         <tomcat7.plugin.version>2.2</tomcat7.plugin.version>
-        <versions.plugin.version>2.2</versions.plugin.version>
-        <war.plugin.version>2.6</war.plugin.version>
+        <versions.plugin.version>2.5</versions.plugin.version>
+        <war.plugin.version>3.2.2</war.plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -211,21 +211,322 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+	        <dependency>
+	            <groupId>javax.servlet</groupId>
+	            <artifactId>jstl</artifactId>
+	            <version>1.2</version>
+	        </dependency>
+	
+	        <!-- Javax Servlet -->
+	        <dependency>
+	            <groupId>javax.servlet</groupId>
+	            <artifactId>javax.servlet-api</artifactId>
+	            <version>${javax.servlet.api.version}</version>
+	            <scope>provided</scope>
+	        </dependency>
+	
+	        <!-- Spring  Dependencies Start-->
+	        <dependency>
+	            <groupId>org.springframework</groupId>
+	            <artifactId>spring-webmvc</artifactId>
+	            <version>${spring.version}</version>
+	        </dependency>
+	
+	        <!-- Spring Aspects -->
+	        <dependency>
+	            <groupId>org.springframework</groupId>
+	            <artifactId>spring-aspects</artifactId>
+	            <version>${spring.version}</version>
+	            <scope>compile</scope>
+	        </dependency>
+	
+	        <!-- Spring Data JPA -->
+	        <dependency>
+	            <groupId>org.springframework.data</groupId>
+	            <artifactId>spring-data-jpa</artifactId>
+	            <version>${spring.data.jpa.version}</version>
+	        </dependency>
+	
+	        <!-- Spring Security -->
+	        <dependency>
+	            <groupId>org.springframework.security</groupId>
+	            <artifactId>spring-security-web</artifactId>
+	            <version>${spring.security.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.springframework.security</groupId>
+	            <artifactId>spring-security-config</artifactId>
+	            <version>${spring.security.version}</version>
+	        </dependency>
+	        <!-- Spring  Dependencies End-->
+	
+	        <!-- Converters Start -->
+	        <!-- Jackson Jaxrs -->
+	        <!--<dependency>
+	            <groupId>org.codehaus.jackson</groupId>
+	            <artifactId>jackson-jaxrs</artifactId>
+	            <version>${jackson.jaxrs.version}</version>
+	        </dependency>-->
+	
+	        <!-- Gson -->
+	        <dependency>
+	            <groupId>com.google.code.gson</groupId>
+	            <artifactId>gson</artifactId>
+	            <version>${gson.version}</version>
+	        </dependency>
+	        <!-- Converters end -->
+	
+	        <!-- Utilities Dependencies Start-->
+	        <!-- Lombok -->
+	        <dependency>
+	            <groupId>org.projectlombok</groupId>
+	            <artifactId>lombok</artifactId>
+	            <version>${lombok.version}</version>
+	            <type>jar</type>
+	        </dependency>
+	
+	        <!-- Guava -->
+	        <dependency>
+	            <groupId>com.google.guava</groupId>
+	            <artifactId>guava</artifactId>
+	            <version>${guava.version}</version>
+	        </dependency>
+	
+	        <!-- Apache Commons Lang -->
+	        <dependency>
+	            <groupId>org.apache.commons</groupId>
+	            <artifactId>commons-lang3</artifactId>
+	            <version>${commons.lang3.version}</version>
+	        </dependency>
+	
+	        <!-- Lambdaj -->
+	        <dependency>
+	            <groupId>com.googlecode.lambdaj</groupId>
+	            <artifactId>lambdaj</artifactId>
+	            <version>${lambdaj.version}</version>
+	            <exclusions>
+	                <!-- Exclude old version of hamcrest -->
+	                <exclusion>
+	                    <artifactId>hamcrest-all</artifactId>
+	                    <groupId>org.hamcrest</groupId>
+	                </exclusion>
+	            </exclusions>
+	        </dependency>
+	        <!-- Utilities Dependencies End-->
+	
+	        <!-- Database Dependencies Start-->
+	        <!-- MySQL -->
+	        <dependency>
+	            <groupId>mysql</groupId>
+	            <artifactId>mysql-connector-java</artifactId>
+	            <version>${mysql.connector.java.version}</version>
+	        </dependency>
+	
+	        <!-- H2 DB -->
+	        <dependency>
+	            <groupId>com.h2database</groupId>
+	            <artifactId>h2</artifactId>
+	            <version>${h2.version}</version>
+	        </dependency>
+	<!--    Java-8
+	        <dependency>
+	            <groupId>com.zaxxer</groupId>
+	            <artifactId>HikariCP</artifactId>
+	            <version>${hikaricp.version}</version>
+	            <scope>compile</scope>
+	        </dependency>-->
+	        <dependency>
+	            <groupId>com.zaxxer</groupId>
+	            <artifactId>HikariCP-java6</artifactId>
+	            <version>${hikaricp.version}</version>
+	            <scope>compile</scope>
+	        </dependency>
+	
+	        <!-- Hibernate -->
+	        <dependency>
+	            <groupId>org.hibernate</groupId>
+	            <artifactId>hibernate-core</artifactId>
+	            <version>${hibernate.version}</version>
+	        </dependency>
+	
+	        <!-- Hibernate Envers -->
+	        <dependency>
+	            <groupId>org.hibernate</groupId>
+	            <artifactId>hibernate-envers</artifactId>
+	            <version>${hibernate.version}</version>
+	        </dependency>
+	
+	        <!-- Hibernate Validator -->
+	        <dependency>
+	            <groupId>org.hibernate</groupId>
+	            <artifactId>hibernate-validator</artifactId>
+	            <version>${hibernate.validator.version}</version>
+	        </dependency>
+	
+	        <!-- QueryDSL -->
+	        <dependency>
+	            <groupId>com.mysema.querydsl</groupId>
+	            <artifactId>querydsl-apt</artifactId>
+	            <version>${querydsl.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>com.mysema.querydsl</groupId>
+	            <artifactId>querydsl-jpa</artifactId>
+	            <version>${querydsl.version}</version>
+	        </dependency>
+	
+	        <!-- Joda Time -->
+	        <dependency>
+	            <groupId>joda-time</groupId>
+	            <artifactId>joda-time</artifactId>
+	            <version>${joda.time.version}</version>
+	        </dependency>
+	
+	        <!-- Joda Money -->
+	        <dependency>
+	            <groupId>org.joda</groupId>
+	            <artifactId>joda-money</artifactId>
+	            <version>${joda.money.version}</version>
+	        </dependency>
+	
+	        <!-- Jadira Usertype (Integrates Joda Time and Joda Money with Hibernate) -->
+	        <dependency>
+	            <groupId>org.jadira.usertype</groupId>
+	            <artifactId>usertype.core</artifactId>
+	            <version>${usertype.core.version}</version>
+	        </dependency>
+	
+	        <!-- Database Dependencies End -->
+	
+	        <!-- Logging Dependencies Start-->
+	        <!-- Using Slf4J Api -->
+	        <dependency>
+	            <groupId>org.slf4j</groupId>
+	            <artifactId>slf4j-api</artifactId>
+	            <version>${slf4j.version}</version>
+	        </dependency>
+	        <!-- Logback Only start -->
+	        <!--<dependency>
+	            <groupId>ch.qos.logback</groupId>
+	            <artifactId>logback-classic</artifactId>
+	            <version>${logback.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>ch.qos.logback</groupId>
+	            <artifactId>logback-access</artifactId>
+	            <version>${logback.version}</version>
+	            <scope>provided</scope>
+	        </dependency>-->
+	        <!-- Logback Only END -->
+	
+	        <!-- Log4j2 Only Start -->
+	        <dependency>
+	            <groupId>org.apache.logging.log4j</groupId>
+	            <artifactId>log4j-slf4j-impl</artifactId>
+	            <version>${logj2.version}</version>
+	            <scope>runtime</scope>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.logging.log4j</groupId>
+	            <artifactId>log4j-api</artifactId>
+	            <version>${logj2.version}</version>
+	            <scope>compile</scope>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.logging.log4j</groupId>
+	            <artifactId>log4j-core</artifactId>
+	            <version>${logj2.version}</version>
+	            <scope>runtime</scope>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.logging.log4j</groupId>
+	            <artifactId>log4j-jcl</artifactId>
+	            <version>${logj2.version}</version>
+	            <scope>runtime</scope>
+	        </dependency>
+	        <!--<dependency>
+	            <groupId>org.slf4j</groupId>
+	            <artifactId>log4j-over-slf4j</artifactId>
+	            <version>${slf4j.version}</version>
+	        </dependency>-->
+	        <!--    for Log4j2.0 API
+	        <dependency>
+	            <groupId>org.apache.logging.log4j</groupId>
+	            <artifactId>log4j-taglib</artifactId>
+	            <version>${logj2.version}</version>
+	            <scope>runtime</scope>
+	        </dependency>-->
+	        <!-- Log4j2 Only END -->
+	
+	        <!-- Logging Dependencies End-->
+	
+	        <!-- Test Dependencies Start-->
+	        <!-- JUnit -->
+	        <dependency>
+	            <groupId>junit</groupId>
+	            <artifactId>junit</artifactId>
+	            <version>${junit.version}</version>
+	            <scope>test</scope>
+	        </dependency>
+	
+	        <!-- Mockito -->
+	        <dependency>
+	            <groupId>org.mockito</groupId>
+	            <artifactId>mockito-core</artifactId>
+	            <version>${mockito.core.version}</version>
+	            <scope>test</scope>
+	        </dependency>
+	
+	        <!-- Hamcrest -->
+	        <dependency>
+	            <groupId>org.hamcrest</groupId>
+	            <artifactId>hamcrest-all</artifactId>
+	            <version>${hamcrest.version}</version>
+	        </dependency>
+	
+	        <!-- Spring Test -->
+	        <dependency>
+	            <groupId>org.springframework</groupId>
+	            <artifactId>spring-test</artifactId>
+	            <version>${spring.version}</version>
+	            <scope>test</scope>
+	        </dependency>
+	
+	        <!-- Fest -->
+	        <dependency>
+	            <groupId>org.easytesting</groupId>
+	            <artifactId>fest-assert-core</artifactId>
+	            <version>${fest.version}</version>
+	            <scope>test</scope>
+	        </dependency>
+	
+	        <!-- Java Melody Monitoring -->
+	        <dependency>
+	            <groupId>net.bull.javamelody</groupId>
+	            <artifactId>javamelody-core</artifactId>
+	            <version>${javamelody.version}</version>
+	        </dependency>
+	
+	        <!-- JMiniX -->
+	        <dependency>
+	            <groupId>org.jminix</groupId>
+	            <artifactId>jminix</artifactId>
+	            <version>${jminix.version}</version>
+	        </dependency>
+	        <!-- Test Dependencies End-->
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
+		<dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
         </dependency>
 
         <!-- Javax Servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>${javax.servlet.api.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -233,14 +534,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
         </dependency>
 
         <!-- Spring Aspects -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
-            <version>${spring.version}</version>
             <scope>compile</scope>
         </dependency>
 
@@ -248,19 +547,16 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>${spring.data.jpa.version}</version>
         </dependency>
 
         <!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>${spring.security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>${spring.security.version}</version>
         </dependency>
         <!-- Spring  Dependencies End-->
 
@@ -276,7 +572,6 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>${gson.version}</version>
         </dependency>
         <!-- Converters end -->
 
@@ -285,7 +580,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
             <type>jar</type>
         </dependency>
 
@@ -293,21 +587,18 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
         </dependency>
 
         <!-- Apache Commons Lang -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>${commons.lang3.version}</version>
         </dependency>
 
         <!-- Lambdaj -->
         <dependency>
             <groupId>com.googlecode.lambdaj</groupId>
             <artifactId>lambdaj</artifactId>
-            <version>${lambdaj.version}</version>
             <exclusions>
                 <!-- Exclude old version of hamcrest -->
                 <exclusion>
@@ -323,14 +614,12 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.connector.java.version}</version>
         </dependency>
 
         <!-- H2 DB -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
         </dependency>
 <!--    Java-8
         <dependency>
@@ -342,7 +631,6 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP-java6</artifactId>
-            <version>${hikaricp.version}</version>
             <scope>compile</scope>
         </dependency>
 
@@ -350,54 +638,46 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>
         </dependency>
 
         <!-- Hibernate Envers -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-envers</artifactId>
-            <version>${hibernate.version}</version>
         </dependency>
 
         <!-- Hibernate Validator -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate.validator.version}</version>
         </dependency>
 
         <!-- QueryDSL -->
         <dependency>
             <groupId>com.mysema.querydsl</groupId>
             <artifactId>querydsl-apt</artifactId>
-            <version>${querydsl.version}</version>
         </dependency>
         <dependency>
             <groupId>com.mysema.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
-            <version>${querydsl.version}</version>
         </dependency>
 
         <!-- Joda Time -->
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>${joda.time.version}</version>
         </dependency>
 
         <!-- Joda Money -->
         <dependency>
             <groupId>org.joda</groupId>
             <artifactId>joda-money</artifactId>
-            <version>${joda.money.version}</version>
         </dependency>
 
         <!-- Jadira Usertype (Integrates Joda Time and Joda Money with Hibernate) -->
         <dependency>
             <groupId>org.jadira.usertype</groupId>
             <artifactId>usertype.core</artifactId>
-            <version>${usertype.core.version}</version>
         </dependency>
 
         <!-- Database Dependencies End -->
@@ -407,18 +687,15 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
         </dependency>
         <!-- Logback Only start -->
         <!--<dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-access</artifactId>
-            <version>${logback.version}</version>
             <scope>provided</scope>
         </dependency>-->
         <!-- Logback Only END -->
@@ -427,37 +704,31 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${logj2.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>${logj2.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>${logj2.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-jcl</artifactId>
-            <version>${logj2.version}</version>
             <scope>runtime</scope>
         </dependency>
         <!--<dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
         </dependency>-->
         <!--    for Log4j2.0 API
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-taglib</artifactId>
-            <version>${logj2.version}</version>
             <scope>runtime</scope>
         </dependency>-->
         <!-- Log4j2 Only END -->
@@ -469,7 +740,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -477,7 +747,6 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>${mockito.core.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -485,14 +754,12 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
-            <version>${hamcrest.version}</version>
         </dependency>
 
         <!-- Spring Test -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -500,7 +767,6 @@
         <dependency>
             <groupId>org.easytesting</groupId>
             <artifactId>fest-assert-core</artifactId>
-            <version>${fest.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -508,17 +774,14 @@
         <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-core</artifactId>
-            <version>${javamelody.version}</version>
         </dependency>
 
         <!-- JMiniX -->
         <dependency>
             <groupId>org.jminix</groupId>
             <artifactId>jminix</artifactId>
-            <version>${jminix.version}</version>
         </dependency>
         <!-- Test Dependencies End-->
-
     </dependencies>
 
     <build>
@@ -737,7 +1000,7 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>${tomcat7.plugin.version}</version>
                 <configuration>
-                    <path>/${build.finalName}</path>
+                    <path>/${project.build.finalName}</path>
                     <port>8080</port>
                     <charset>UTF-8</charset>
                     <uriEncoding>UTF-8</uriEncoding>

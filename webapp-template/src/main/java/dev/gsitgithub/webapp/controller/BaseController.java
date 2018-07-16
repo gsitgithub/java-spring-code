@@ -12,4 +12,8 @@ public class BaseController {
     public String landingPage() {
         return "index";
     }
+    @RequestMapping(value = {"/error","/error/"})
+    public String errorPage() {
+        return "root";
+    }
 }

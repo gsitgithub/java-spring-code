@@ -24,11 +24,15 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -42,7 +46,7 @@ import java.util.List;
 @Configuration
 @Slf4j
 @ComponentScan(basePackages = "dev.gsitgithub.webapp.controller",
-        includeFilters = {@ComponentScan.Filter(Controller.class)} )
+        includeFilters = {@ComponentScan.Filter(Controller.class), @ComponentScan.Filter(RestController.class)} )
 public class SpringMvcConfig extends WebMvcConfigurationSupport {
 
     @Value("${application.environment}")
@@ -52,22 +56,18 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
     @Inject
     EntityManagerFactory entityManagerFactory;
 
-    @Bean
     public ExecutionTimeInterceptor executionTimeInterceptor() {
         return new ExecutionTimeInterceptor();
     }
 
-    @Bean
     public LocaleInterceptor localeInterceptor() {
         return new LocaleInterceptor("locale");
     }
 
-    @Bean
     public TimeZoneInterceptor timeZoneInterceptor() {
         return new TimeZoneInterceptor("timezone");
     }
 
-    @Bean
     public OpenEntityManagerInViewInterceptor openEntityManagerInViewInterceptor() {
         OpenEntityManagerInViewInterceptor openEntityManagerInViewInterceptor = new OpenEntityManagerInViewInterceptor();
         openEntityManagerInViewInterceptor.setEntityManagerFactory(entityManagerFactory);
@@ -112,14 +112,13 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
                     .setCachePeriod(0); // Don't chache
         }
     }
-/*
-    @Bean
+
     @Override
     public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
         RequestMappingHandlerAdapter adapter = super.requestMappingHandlerAdapter();
         adapter.setIgnoreDefaultModelOnRedirect(true); // Makes sure url parameters are removed on a redirect
         return adapter;
-    }*/
+    }
 
     // TODO: Start using @PathVariable in Controllers or remove from configuration
     // for an example see http://refcardz.dzone.com/refcardz/core-spring-data#refcard-download-social-buttons-display
@@ -138,17 +137,27 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry){
-        //registry.addViewController("/").setViewName("index");
-        registry.addViewController("/index.html").setViewName("root");
+//        registry.addViewController("/").setViewName("index");
+//        registry.addViewController("/index.html").setViewName("root");
     }
 
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
     // TODO: view resolver is not working, try Themeleaf
-    @Bean
-    public ViewResolver viewResolver() {
+    @Override
+    protected void configureViewResolvers( ViewResolverRegistry registry ) {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/");
+        viewResolver.setPrefix("/WEB-INF/");
         viewResolver.setSuffix(".html");
-        return viewResolver;
+        registry.viewResolver( viewResolver );
+        super.configureViewResolvers( registry );
+    }
+
+    @Bean
+    public MultipartResolver multipartResolver() {
+        return new StandardServletMultipartResolver();
     }
 }

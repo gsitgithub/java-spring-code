@@ -1,0 +1,122 @@
+<configuration scan="true" debug="false">
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <!-- Enable JMX Management -->
+    <jmxConfigurator />
+
+    <!-- Console Application -->
+    <appender name="console-application" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%X{username:-noUser} %X{session:-noSession} %cyan(%d{"HH:mm ss"})   %highlight(%-5level   %-130message)   %cyan(%c{0}:%line) %n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File Application -->
+    <appender name="file-application" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>target/logs/application.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>target/logs/history/application-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <maxHistory>356</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{"HH:mm ss"}   %-5level   %-130message   %c{0}:%line %n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Html Application -->
+    <appender name="html-application" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>target/logs/html/application.log.html</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>target/logs/html/application-%d{yyyy-MM-dd}.html.gz</fileNamePattern>
+            <maxHistory>356</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.html.HTMLLayout">
+                <pattern>%d{"HH:mm ss"}%mdc%thread%logger%level%message</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <!-- File Users -->
+    <appender name="file-users" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <key>username</key>
+            <defaultValue>_nouser</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="file-users-${username}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <file>target/logs/users/${username}.log</file>
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <fileNamePattern>target/logs/users/history/${username}-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+                    <maxHistory>356</maxHistory>
+                </rollingPolicy>
+                <encoder>
+                    <pattern>%d{"HH:mm ss"}   %-5level   %-130message   %c{0}:%line %n</pattern>
+                </encoder>
+            </appender>
+        </sift>
+    </appender>
+
+    <!-- Spring -->
+    <logger name="org.springframework" level="INHERITED"/>
+    <logger name="org.springframework.web" level="INHERITED"/>
+    <logger name="org.springframework.security" level="INHERITED"/>
+    <logger name="org.springframework.aop" level="INHERITED"/>
+
+    <!-- Hibernate -->
+    <logger name="org.hibernate" level="INHERITED"/>
+
+    <!-- Sql -->
+    <logger name="jdbc.sqlonly" level="INHERITED"/>
+    <logger name="jdbc.sqltiming" level="INHERITED"/>
+    <logger name="jdbc.audit" level="INHERITED"/>
+    <logger name="jdbc.resultset" level="INHERITED"/>
+    <logger name="jdbc.connection" level="INHERITED"/>
+    <logger name="log4jdbc.debug" level="INHERITED"/>
+
+    <!-- Java Melody -->
+    <logger name="javamelody" level="INHERITED"/>
+    <logger name="net.bull.javamelody" level="INHERITED"/>
+
+    <!-- AndiDev -->
+    <logger name="org.andidev" level="INFO"/>
+
+    <!-- Main log level (levels: TRACE, DEBUG, INFO, WARN, ERROR, ALL, OFF, INHERITED) -->
+    <root level="WARN">
+        <appender-ref ref="console-application"/>
+        <appender-ref ref="file-application"/>
+        <appender-ref ref="html-application"/>
+        <appender-ref ref="file-users"/>
+    </root>
+
+    <!-- log4jdbc logging
+        Logger           Function
+        jdbc.sqlonly	 Log all SQL DML statements as they are executed with all JDBC parameters
+        jdbc.sqltiming	 Log all SQL post-execution info, including timing statistics on how long the SQL took to execute.
+        jdbc.audit	 Log all JDBC method-calls except for ResultSets. This is a very voluminous output, and is not normally needed unless tracking down a specific JDBC problem.
+        jdbc.resultset	 Log all JDBC ResultSets. Even more voluminous, because all calls to ResultSet objects are logged.
+        jdbc.connection  Log all connection open and close events as well as dumping all open connection numbers. This is very useful for hunting down connection leak problems.
+        log4jdbc.debug   At this time it just prints out information on which underlying drivers were found and not found when the log4jdbc spy driver loads.
+        Each of these logs can be set at either DEBUG, INFO or ERROR level.
+        DEBUG  includes the class name and line number (if available) at which the SQL was executed. Use DEBUG level with extra care, as this imposes an additional performance penalty when in use.
+        INFO   includes the SQL (or other information as applicable.)
+        ERROR  will show the stack traces in the log output when SQLExceptions occur.
+    -->
+
+    <!-- Hibernate logging
+        Logger                      Function
+        org.hibernate.SQL           Log all SQL DML statements as they are executed
+        org.hibernate.type          Log all JDBC parameters
+        org.hibernate.tool.hbm2ddl  Log all SQL DDL statements as they are executed
+        org.hibernate.pretty        Log the state of all entities (max 20 entities) associated with the session at flush time
+        org.hibernate.cache         Log all second-level cache activity
+        org.hibernate.transaction   Log transaction related activity
+        org.hibernate.jdbc          Log all JDBC resource acquisition
+        org.hibernate.hql.ast.AST   Log HQL and SQL ASTs during query parsing
+        org.hibernate.secure        Log all JAAS authorization requests
+        org.hibernate               Log everything (a lot of information, but very useful for troubleshooting)
+    -->
+
+</configuration>

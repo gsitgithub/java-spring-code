@@ -4,13 +4,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
                    http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-    <error-page>
-        <error-code>404</error-code>
-        <location>/pagenotfound</location>
-    </error-page>
-    <error-page>
-        <location>/error</location>
-    </error-page>
 </web-app>-->
 
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
@@ -18,5 +11,12 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error</location>
+    </error-page>
+    <error-page>
+        <location>/error</location>
+    </error-page>
 
 </web-app>
