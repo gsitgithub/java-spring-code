@@ -1,19 +1,23 @@
 package dev.gsitgithub.webapp.config.springsecurity;
 
-import dev.gsitgithub.webapp.config.logging.MDC;
-import dev.gsitgithub.webapp.entity.User;
-import lombok.extern.slf4j.Slf4j;
-import org.joda.time.Period;
+import static dev.gsitgithub.webapp.config.utils.ApplicationUtils.getSession;
+import static dev.gsitgithub.webapp.config.utils.ApplicationUtils.getUser;
+import static dev.gsitgithub.webapp.config.utils.ApplicationUtils.getUsername;
+import static dev.gsitgithub.webapp.config.utils.StringUtils.quote;
+import static dev.gsitgithub.webapp.config.utils.TimeUtils.format;
+
+import java.time.Duration;
+
+import javax.inject.Inject;
+
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.web.authentication.switchuser.AuthenticationSwitchUserEvent;
 import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
-
-import static dev.gsitgithub.webapp.config.utils.ApplicationUtils.*;
-import static dev.gsitgithub.webapp.config.utils.StringUtils.quote;
-import static dev.gsitgithub.webapp.config.utils.TimeUtils.format;
+import dev.gsitgithub.webapp.config.logging.MDC;
+import dev.gsitgithub.webapp.entity.User;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
@@ -59,9 +63,9 @@ public class LoginListener {
         setAutomaticLogoutTime(user.getAutomaticLogoutTime());
     }
 
-    private void setAutomaticLogoutTime(Period automaticLogoutTime) {
-        log.info("Setting automatic logout time to {}", format(automaticLogoutTime));
-        int automaticLogoutTimeInSeconds = automaticLogoutTime.toStandardSeconds().getSeconds();
+    private void setAutomaticLogoutTime(Duration automaticLogoutTime) {
+    	int automaticLogoutTimeInSeconds = (int) automaticLogoutTime.toMillis();
+        log.info("Setting automatic logout time to {}", format(automaticLogoutTimeInSeconds));
         getSession().setMaxInactiveInterval(automaticLogoutTimeInSeconds);
     }
 

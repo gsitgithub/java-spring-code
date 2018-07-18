@@ -4,6 +4,7 @@ import dev.gsitgithub.webapp.config.database.ImportSql;
 import dev.gsitgithub.webapp.config.utils.ApplicationEnvironmentUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
@@ -27,9 +28,11 @@ import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 
 @Configuration
-@ComponentScan(basePackages = {"dev.gsitgithub.webapp.config", "dev.gsitgithub.webapp.service"})
+@ComponentScan(basePackages = {"dev.gsitgithub.webapp.config", "dev.gsitgithub.webapp.service"}
+//		,excludeFilters = @Filter(Configuration.class)
+)
 @EnableTransactionManagement
-@EnableJpaRepositories("dev.gsitgithub.webapp.repository")
+@EnableJpaRepositories(basePackages = {"dev.gsitgithub.webapp.repository"})
 @EnableMBeanExport
 @EnableAspectJAutoProxy
 public class ApplicationConfig {

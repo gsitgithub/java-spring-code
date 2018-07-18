@@ -1,9 +1,9 @@
 package dev.gsitgithub.webapp.config.springsecurity;
 
+import dev.gsitgithub.webapp.config.utils.DateUtil;
 import dev.gsitgithub.webapp.entity.RememberMeToken;
 import dev.gsitgithub.webapp.repository.RememberMeTookenRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.joda.time.DateTime;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
@@ -19,7 +19,7 @@ public class SpringDataTokenRepositoryImpl implements PersistentTokenRepository 
 
     @Override
     public void createNewToken(PersistentRememberMeToken token) {
-        RememberMeToken rememberMeToken = new RememberMeToken(token.getUsername(), token.getSeries(), token.getTokenValue(), new DateTime(token.getDate()));
+        RememberMeToken rememberMeToken = new RememberMeToken(token.getUsername(), token.getSeries(), token.getTokenValue(), DateUtil.toZonedDateTime(token.getDate()));
         rememberMeTookenRepository.save(rememberMeToken);
     }
 
@@ -27,7 +27,7 @@ public class SpringDataTokenRepositoryImpl implements PersistentTokenRepository 
     public void updateToken(String series, String tokenValue, Date lastUsed) {
         RememberMeToken rememberMeToken = rememberMeTookenRepository.findBySeries(series);
         rememberMeToken.setToken(tokenValue);
-        rememberMeToken.setLastUsed(new DateTime(lastUsed));
+        rememberMeToken.setLastUsed(DateUtil.toZonedDateTime(lastUsed));
         rememberMeTookenRepository.save(rememberMeToken);
     }
 
@@ -38,7 +38,7 @@ public class SpringDataTokenRepositoryImpl implements PersistentTokenRepository 
             log.debug("No remember me token for series '{}' was found.", series);
             return null;
         }
-        return new PersistentRememberMeToken(rememberMeToken.getUsername(), rememberMeToken.getSeries(), rememberMeToken.getToken(), rememberMeToken.getLastUsed().toDate());
+        return new PersistentRememberMeToken(rememberMeToken.getUsername(), rememberMeToken.getSeries(), rememberMeToken.getToken(), DateUtil.toDate(rememberMeToken.getLastUsed()));
     }
 
     @Override

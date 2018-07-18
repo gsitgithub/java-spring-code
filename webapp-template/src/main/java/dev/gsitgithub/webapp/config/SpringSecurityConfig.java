@@ -7,6 +7,7 @@ import dev.gsitgithub.webapp.config.springsecurity.UserDetailsServiceAnonymousAu
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.RememberMeAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,6 +26,7 @@ import javax.inject.Inject;
 
 @Configuration
 @EnableWebSecurity
+@Profile(WebXmlConfig.PROFILE_SECURITY)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     static final String REMEMBER_ME_KEY = "78780c25-1849-4796-a79c-0f4326f32dfd";
@@ -54,9 +56,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             .headers() // TODO: (REWRITE) This enables opening javamelody in an iframe, see https://jira.spring.io/browse/SEC-2501 and https://jira.spring.io/browse/SPR-11496
                 .addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
                 .and()
-            .requiresChannel()
-                .anyRequest().requiresSecure()
-                .and()
+            // enable https forwarding
+//            .requiresChannel()
+//                .anyRequest().requiresSecure()
+//                .and()
             .authorizeRequests()
                 .expressionHandler(webSecurityExpressionHandler())
                 .antMatchers("/database/**").access("hasRole('ROLE_DEVELOPER') and !isProductionEnvironment()")
