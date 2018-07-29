@@ -28,13 +28,8 @@ import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 
 import dev.gsitgithub.webapp.config.format.custom.CustomFormatAnnotationFormatterFactory;
 import dev.gsitgithub.webapp.config.format.json.JsonFormatAnnotationFormatterFactory;
@@ -49,7 +44,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @ComponentScan(basePackages = "dev.gsitgithub.webapp.controller",
         includeFilters = {@ComponentScan.Filter(Controller.class), @ComponentScan.Filter(RestController.class)} )
-public class SpringMvcConfig extends WebMvcConfigurationSupport {
+public class SpringRestConfig extends WebMvcConfigurationSupport {
 
     @Value("${application.environment}")
     private String applicationEnvironment;
@@ -80,7 +75,7 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(executionTimeInterceptor());
+        registry.addInterceptor(executionTimeInterceptor()).order(10);
         registry.addInterceptor(localeInterceptor());
         registry.addInterceptor(timeZoneInterceptor());
         if (openEntityManagerInViewInterceptor != null)
@@ -106,19 +101,6 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
     }
 
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        if (applicationEnvironment.equals(ApplicationEnvironmentUtils.PRODUCTION)) {
-            registry.addResourceHandler("/resources-" + version + "/**")
-                    .addResourceLocations("/resources/")
-                    .setCachePeriod(365 * 24 * 60 * 60); // 365*24*60*60 equals one year
-        } else {
-            registry.addResourceHandler("/resources-" + version + "/**")
-                    .addResourceLocations("/resources/")
-                    .setCachePeriod(0); // Don't chache
-        }
-    }
-
-    @Override
     public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
         RequestMappingHandlerAdapter adapter = super.requestMappingHandlerAdapter();
         adapter.setIgnoreDefaultModelOnRedirect(true); // Makes sure url parameters are removed on a redirect
@@ -141,24 +123,8 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
     }
 
     @Override
-    public void addViewControllers(ViewControllerRegistry registry){
-        //registry.addViewController("/").setViewName("index");
-//        registry.addViewController("/index.html").setViewName("index");
-    }
-
-    @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
-    }
-    // TODO: view resolver is not working, try Themeleaf
-    @Override
-    protected void configureViewResolvers( ViewResolverRegistry registry ) {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/");
-        viewResolver.setSuffix(".html");
-        registry.viewResolver( viewResolver );
-        super.configureViewResolvers( registry );
     }
 
     @Bean

@@ -213,11 +213,6 @@
                 <type>pom</type>
             </dependency>
             
-            <dependency>
-	            <groupId>javax.servlet.jsp.jstl</groupId>
-	            <artifactId>jstl</artifactId>
-	            <version>1.2</version>
-	        </dependency>
 	<!-- https://mvnrepository.com/artifact/javax.inject/javax.inject -->
 			<dependency>
 			    <groupId>javax.inject</groupId>
@@ -515,10 +510,6 @@
 		    <groupId>javax.inject</groupId>
 		    <artifactId>javax.inject</artifactId>
 		</dependency>
-        <dependency>
-            <groupId>javax.servlet.jsp.jstl</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
         <dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>javax.servlet.jsp-api</artifactId>
