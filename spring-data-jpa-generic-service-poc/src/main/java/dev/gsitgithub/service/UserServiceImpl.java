@@ -2,12 +2,12 @@ package dev.gsitgithub.service;
 
 import javax.transaction.Transactional;
 
-import dev.gsitgithub.entity.User;
-import dev.gsitgithub.generic.service.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.gsitgithub.dao.repo.UserRepository;
+import dev.gsitgithub.entity.User;
+import dev.gsitgithub.generic.service.GenericServiceImpl;
 
 @Service
 @Transactional

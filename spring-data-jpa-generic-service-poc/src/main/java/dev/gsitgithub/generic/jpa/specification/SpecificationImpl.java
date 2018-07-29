@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dev.gsitgithub.generic.repo.specification;
+package dev.gsitgithub.generic.jpa.specification;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.jpa.domain.Specification;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.jpa.domain.Specification;
 
 public class SpecificationImpl<Object> implements Specification<Object> {
     private static final Logger logger = LoggerFactory.getLogger(SpecificationImpl.class);

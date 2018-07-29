@@ -7,17 +7,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import dev.gsitgithub.generic.repo.BaseEntity;
-import dev.gsitgithub.generic.repo.GenericRepository;
+import dev.gsitgithub.generic.api.BaseEntity;
+import dev.gsitgithub.generic.api.GenericRepository;
+import dev.gsitgithub.generic.api.GenericService;
 
 public abstract class GenericServiceImpl<T extends BaseEntity, ID extends Serializable> 
 	implements GenericService<T, ID> {
 
-	protected static final Logger log = Logger.getLogger("dev.gsitgithub.lab.service");
+	protected static final Logger log = LoggerFactory.getLogger(GenericServiceImpl.class);
+	
 	protected static String[] ALL_STATUSES ;//= new String[]{ObjectStatusValues.STATUS_ACTIVE,ObjectStatusValues.STATUS_APPROVED,ObjectStatusValues.STATUS_CANCELLED,ObjectStatusValues.STATUS_COMPLETED,ObjectStatusValues.STATUS_EXCEPTION,ObjectStatusValues.STATUS_INELIGIBLE,ObjectStatusValues.STATUS_INVALID,ObjectStatusValues.STATUS_PROPOSED,ObjectStatusValues.STATUS_REJECTED,ObjectStatusValues.STATUS_SUSPENDED,ObjectStatusValues.STATUS_SUBMITTED,ObjectStatusValues.STATUS_TERMINATED,ObjectStatusValues.STATUS_VERIFIED}; 
 	private GenericRepository<T,ID> repository;
 	

@@ -6,9 +6,6 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
-import dev.gsitgithub.entity.Role;
-import dev.gsitgithub.entity.User;
-import dev.gsitgithub.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +14,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import dev.gsitgithub.entity.Role;
+import dev.gsitgithub.entity.User;
 import dev.gsitgithub.entity.UserRight;
+import dev.gsitgithub.service.UserService;
 
 //@Service
 //@Transactional(readOnly=true)

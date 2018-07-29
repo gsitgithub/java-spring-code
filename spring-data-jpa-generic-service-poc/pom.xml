@@ -14,6 +14,7 @@
 			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
 		</repository>
 	</repositories> -->
+	<!-- https://github.com/nydiarra/springboot-jwt/blob/master/src/main/java/com/nouhoun/springboot/jwt/integration/config/AuthorizationServerConfig.java -->
 	<properties>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
@@ -23,9 +24,38 @@
 		<spring.security.version>3.2.5.RELEASE</spring.security.version>
 		<!-- <hibernate.version>3.6.3.Final</hibernate.version> -->
 		<hibernate.version>4.3.8.Final</hibernate.version>
+		<eclipse.version>2.7.2</eclipse.version>
 		<log4j.version>2.1</log4j.version>
 	</properties>
+	
+	<profiles>
+		<profile>
+			<id>development</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+			    <dependency>
+			      <groupId>org.hsqldb</groupId>
+			      <artifactId>hsqldb</artifactId>
+			      <version>2.3.3</version>
+			    </dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+	
   <dependencies>
+  	<dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <version>2.3.3</version>
+    </dependency>
+  	<dependency>
+	    <groupId>javax</groupId>
+	    <artifactId>javaee-api</artifactId>
+	    <version>8.0</version>
+	    <!-- <scope>provided</scope> -->
+	</dependency>
 	  <dependency>
 		<groupId>cglib</groupId>
 		<artifactId>cglib</artifactId>
@@ -176,11 +206,11 @@
 	    Spring MVC for Portlet Environments (depends on spring-core, spring-beans, spring-context, spring-web)
 	    Define this if you use Spring MVC with a Portlet Container (org.springframework.web.portlet.*)
 	-->
-	<dependency>
+	<!-- <dependency>
 	  <groupId>org.springframework</groupId>
 	  <artifactId>spring-webmvc-portlet</artifactId>
 	  <version>${org.springframework.version}</version>
-	</dependency>
+	</dependency> -->
 	 
 	<!--
 	    Support for testing Spring applications with tools such as JUnit and TestNG
@@ -320,11 +350,17 @@
 		</dependency>
 	
 	<!-- Persistence -->
-<!-- 	<dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-core</artifactId>
-		<version>${hibernate.version}</version>
-	</dependency> -->
+	<!-- Spring data jpa support using Hibernate start -->
+	<dependency>
+		<groupId>org.springframework.data</groupId>
+		<artifactId>spring-data-jpa</artifactId>
+		<version>${data.springframework.version}</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.eclipse.persistence</groupId>
+	    <artifactId>eclipselink</artifactId>
+	    <version>${eclipse.version}</version>
+	</dependency>
 	<dependency>
 		<groupId>org.hibernate</groupId>
 		<artifactId>hibernate-entitymanager</artifactId>
@@ -332,11 +368,16 @@
 	</dependency>
 	<!-- Bytecode reader for Hibernate -->
 	<dependency>
-		<groupId>javassist</groupId>
+		<groupId>org.javassist</groupId>
 		<artifactId>javassist</artifactId>
-		<version>3.12.1.GA</version>
+		<version>3.18.2-GA</version>
 	</dependency>
  	<!-- Database Pooling support (Commons OR HikariCp)-->
+ 	<dependency>
+	    <groupId>com.vladmihalcea.flexy-pool</groupId>
+	    <artifactId>flexy-hikaricp</artifactId>
+	    <version>2.0.0</version>
+	</dependency>
 	<dependency>
 	  <groupId>commons-dbcp</groupId>
 	  <artifactId>commons-dbcp</artifactId>
@@ -354,8 +395,9 @@
 	    <artifactId>mysql-connector-java</artifactId>
 	    <version>5.1.9</version>
 	</dependency>
+	<!-- End Persistence -->
 	
-	<!-- Servlet API -->
+	<!-- Web Servlet API -->
 	<dependency>
 	    <groupId>javax.servlet</groupId>
 	    <artifactId>javax.servlet-api</artifactId>
@@ -431,13 +473,6 @@
 		<version>1.8.5</version>
 	</dependency>
 
-	<!-- Spring data jpa support using Hibernate start -->
-	<dependency>
-		<groupId>org.springframework.data</groupId>
-		<artifactId>spring-data-jpa</artifactId>
-		<version>${data.springframework.version}</version>
-	</dependency>
-	
 	<!-- Logging -->
 	<dependency>  
        <groupId>log4j</groupId>  

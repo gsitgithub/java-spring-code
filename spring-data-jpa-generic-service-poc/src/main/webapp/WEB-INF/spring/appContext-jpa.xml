@@ -2,32 +2,59 @@
 <beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 					http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
                     http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-    <property name="poolName" value="springHikariCP" />
-    <property name="connectionTestQuery" value="SELECT 1" />
-    <property name="dataSourceClassName" value="${hikari.dataSourceClassName}" />
-    <property name="maximumPoolSize" value="${hikari.maximumPoolSize}" />
-    <property name="idleTimeout" value="${hikari.idleTimeout}" />
+    <bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+        p:location="/WEB-INF/jdbc-development.properties" />
+        
+	<!-- <bean id="configurationBuilder" class="com.vladmihalcea.flexypool.config.Configuration$Builder">
+		<constructor-arg value="uniqueId"/>
+		<constructor-arg ref="poolingDataSource"/>
+		<constructor-arg value="#{ T(com.vladmihalcea.flexypool.adaptor.HikariCPPoolAdapter).FACTORY }"/>
+	</bean>
+	
+	<bean id="configuration" factory-bean="configurationBuilder" factory-method="build"/>
+	<bean id="dataSource" class="com.vladmihalcea.flexypool.FlexyPoolDataSource" init-method="start" destroy-method="stop">
+		<constructor-arg ref="configuration"/>
+		<constructor-arg>
+			<array>
+				<bean class="com.vladmihalcea.flexypool.strategy.IncrementPoolOnTimeoutConnectionAcquiringStrategy.Factory">
+					<constructor-arg value="5"/>
+				</bean>
+				<bean class="com.vladmihalcea.flexypool.strategy.RetryConnectionAcquiringStrategy.Factory">
+					<constructor-arg value="2"/>
+				</bean>
+			</array>
+		</constructor-arg>
+	</bean> -->
 
-    <property name="dataSourceProperties">
-        <props>
-            <prop key="url">${jdbc.databaseurl}</prop>
-            <prop key="user">${jdbc.username}</prop>
-            <prop key="password">${jdbc.password}</prop>
-        </props>
-    </property>
-</bean>
-
-<!-- HikariCP configuration -->
-<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-    <constructor-arg ref="hikariConfig" />
-</bean>
+	<!-- HikariCP configuration -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	    <property name="dataSourceClassName" value="${hikari.dataSourceClassName}" />
+	    
+	    <property name="poolName" value="springHikariCP" />
+	    <property name="connectionTestQuery" value="SELECT 1" />
+	    <property name="maximumPoolSize" value="${hikari.maximumPoolSize}" />
+	    <property name="idleTimeout" value="${hikari.idleTimeout}" />
+	
+	    <property name="dataSourceProperties">
+	        <props>
+	            <prop key="url">${jdbc.databaseurl}</prop>
+	            <prop key="user">${jdbc.username}</prop>
+	            <prop key="password">${jdbc.password}</prop>
+	        </props>
+	    </property>
+	</bean>
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	    <constructor-arg ref="hikariConfig" />
+	</bean>
+	
 <!-- 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
@@ -56,6 +83,9 @@
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
             	<prop key="hibernate.connection.charSet">UTF-8</prop>
+            	
+            	<prop key="eclipselink.ddl-generation">create-tables</prop>
+      			<prop key="eclipselink.ddl-generation.output-mode">database</prop>
             </props>
         </property>
     </bean>
@@ -70,5 +100,38 @@
 <!--     <tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/> -->
     
    	<jpa:repositories base-package="dev.gsitgithub.dao.repo"
-		factory-class="dev.gsitgithub.generic.config.DefaultRepositoryFactoryBean"/>
+		factory-class="dev.gsitgithub.generic.jpa.DefaultRepositoryFactoryBean"/>
+		
+	   
+<!--     <bean id="dataSource"
+        class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+        p:driverClassName="${jdbc.driverClassName}"
+        p:url="${jdbc.databaseurl}" p:username="${jdbc.username}"
+        p:password="${jdbc.password}" />
+ 
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">  for Hibernate 3.x
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:hibernate.cfg.xml" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${jdbc.dialect}</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+            </props>
+        </property>
+        <property name="schemaUpdate" value="true"></property>
+    </bean>
+    
+    <tx:annotation-driven />
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager"> for Hibernate 3.x
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean> -->
+
+<!-- 	<bean id="employeeDAO" class="EmployeeDaoImpl" />
+    <bean id="employeeManager" class="EmployeeManagerImpl" />
+    <bean id="userProfileDAO" class="UserProfileDaoImpl" />
+    <bean id="userProfileService" class="UserProfileServiceImpl" />
+    <bean id="urlConfigDao" class="UrlConfigDaoImpl" /> -->
 </beans:beans>

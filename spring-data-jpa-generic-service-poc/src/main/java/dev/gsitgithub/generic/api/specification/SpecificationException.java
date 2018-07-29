@@ -1,4 +1,4 @@
-package dev.gsitgithub.generic.repo.specification.exception;
+package dev.gsitgithub.generic.api.specification;
 
 public class SpecificationException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

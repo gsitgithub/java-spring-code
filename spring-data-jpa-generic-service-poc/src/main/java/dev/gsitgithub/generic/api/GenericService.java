@@ -1,11 +1,9 @@
-package dev.gsitgithub.generic.service;
+package dev.gsitgithub.generic.api;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
-import dev.gsitgithub.generic.repo.BaseEntity;
 
 public interface GenericService<T extends BaseEntity, ID extends Serializable> {
 	int NUMBER_OF_PERSONS_PER_PAGE = 20;

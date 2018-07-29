@@ -1,13 +1,19 @@
 package dev.gsitgithub.entity;
 
-// import com.fasterxml.jackson.annotation.JsonInclude;
-
-import dev.gsitgithub.generic.repo.BaseEntity;
-
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import dev.gsitgithub.generic.api.BaseEntity;
 
 @Entity
 public class Person implements BaseEntity {

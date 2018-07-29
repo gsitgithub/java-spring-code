@@ -4,7 +4,6 @@ import dev.gsitgithub.webapp.config.logging.MDCInsertingServletFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.h2.server.web.WebServlet;
 import org.jminix.console.servlet.MiniConsoleServlet;
-import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;

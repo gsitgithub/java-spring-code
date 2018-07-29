@@ -4,11 +4,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import dev.gsitgithub.entity.Role;
-import dev.gsitgithub.entity.User;
-import dev.gsitgithub.entity.UserRight;
-import dev.gsitgithub.security.UserAuthority;
-import dev.gsitgithub.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
@@ -16,6 +11,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.transaction.annotation.Transactional;
+
+import dev.gsitgithub.entity.Role;
+import dev.gsitgithub.entity.User;
+import dev.gsitgithub.entity.UserRight;
+import dev.gsitgithub.security.UserAuthority;
+import dev.gsitgithub.service.UserService;
 
 //@Service
 @Transactional(readOnly = true)

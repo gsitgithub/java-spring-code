@@ -4,20 +4,22 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import dev.gsitgithub.entity.Role;
-import dev.gsitgithub.entity.User;
-import dev.gsitgithub.entity.UserRight;
-import dev.gsitgithub.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import dev.gsitgithub.entity.Role;
+import dev.gsitgithub.entity.User;
+import dev.gsitgithub.entity.UserRight;
+import dev.gsitgithub.service.UserService;
 
 public class CustomAuthenticationManager implements AuthenticationManager {
 
@@ -25,8 +27,10 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 	private UserService userService;
 	private final String PERMISSION_PREFIX = "ROLE_RIGHT_";
 	
-	// We need an Md5 encoder since our passwords in the database are Md5 encoded.
-	 private ShaPasswordEncoder passwordEncoder = new ShaPasswordEncoder();
+	// We need an Md5(WEAK) encoder since our passwords in the database are Md5 encoded.
+//	 private PasswordEncoder passwordEncoder = new ShaPasswordEncoder();
+	 private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
 	
 	@Override
 	public Authentication authenticate(Authentication auth)

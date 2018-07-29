@@ -1,4 +1,23 @@
-package dev.gsitgithub.generic.repo.specification;
+package dev.gsitgithub.generic.jpa.specification;
+
+import static dev.gsitgithub.generic.api.specification.Filter.AND;
+import static dev.gsitgithub.generic.api.specification.Filter.CONTAINS;
+import static dev.gsitgithub.generic.api.specification.Filter.END_WITH;
+import static dev.gsitgithub.generic.api.specification.Filter.EQUAL;
+import static dev.gsitgithub.generic.api.specification.Filter.GREATER_THAN;
+import static dev.gsitgithub.generic.api.specification.Filter.GREATER_THAN_OR_EQUAL;
+import static dev.gsitgithub.generic.api.specification.Filter.IN;
+import static dev.gsitgithub.generic.api.specification.Filter.IS_EMPTY;
+import static dev.gsitgithub.generic.api.specification.Filter.IS_NOT_EMPTY;
+import static dev.gsitgithub.generic.api.specification.Filter.IS_NOT_NULL;
+import static dev.gsitgithub.generic.api.specification.Filter.IS_NULL;
+import static dev.gsitgithub.generic.api.specification.Filter.LESS_THAN;
+import static dev.gsitgithub.generic.api.specification.Filter.LESS_THAN_OR_EQUAL;
+import static dev.gsitgithub.generic.api.specification.Filter.NOT_CONTAINS;
+import static dev.gsitgithub.generic.api.specification.Filter.NOT_EQUAL;
+import static dev.gsitgithub.generic.api.specification.Filter.OR;
+import static dev.gsitgithub.generic.api.specification.Filter.PATH_DELIMITER;
+import static dev.gsitgithub.generic.api.specification.Filter.START_WITH;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,8 +36,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.domain.Specification;
 
-import dev.gsitgithub.generic.repo.specification.exception.SpecificationException;
-import static dev.gsitgithub.generic.repo.specification.Filter.*;
+import dev.gsitgithub.generic.api.specification.Filter;
+import dev.gsitgithub.generic.api.specification.SpecificationException;
 
 public class WhereSpecification implements Specification<Object> {
     private static Logger logger = LoggerFactory.getLogger(WhereSpecification.class);

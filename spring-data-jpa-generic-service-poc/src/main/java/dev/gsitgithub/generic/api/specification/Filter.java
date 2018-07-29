@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dev.gsitgithub.generic.repo.specification;
+package dev.gsitgithub.generic.api.specification;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import dev.gsitgithub.generic.repo.specification.exception.SpecificationException;
 
 public class Filter {
     /*

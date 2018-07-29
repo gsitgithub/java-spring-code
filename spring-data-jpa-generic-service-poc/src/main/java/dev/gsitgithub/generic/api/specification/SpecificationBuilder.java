@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dev.gsitgithub.generic.repo.specification;
+package dev.gsitgithub.generic.api.specification;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +25,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-import java.util.Arrays;
-import java.util.List;
+import dev.gsitgithub.generic.jpa.specification.JoinSpecification;
+import dev.gsitgithub.generic.jpa.specification.SpecificationImpl;
+import dev.gsitgithub.generic.jpa.specification.WhereSpecification;
 
 public class SpecificationBuilder<T> {
     private static Logger logger = LoggerFactory.getLogger(SpecificationBuilder.class);

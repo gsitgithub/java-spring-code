@@ -24,6 +24,19 @@
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping> -->
 
+    <context-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>
+	    	/WEB-INF/spring/rootContext.xml
+	    	/WEB-INF/spring/appContext-jpa.xml
+	    	<!-- /WEB-INF/spring/appContext-security.xml -->
+	    </param-value>
+	</context-param>
+	<context-param>
+	    <param-name>log4jConfigLocation</param-name>
+	    <param-value>classpath:log4j.properties</param-value>
+	</context-param>
+
     <servlet>
         <servlet-name>employee</servlet-name>
         <servlet-class>
@@ -39,21 +52,9 @@
         <servlet-name>employee</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-    <context-param>
-	    <param-name>contextConfigLocation</param-name>
-	    <param-value>
-	    	/WEB-INF/spring/rootContext.xml
-	    	<!-- /WEB-INF/spring/appContext-jpa.xml
-	    	/WEB-INF/spring/appContext-security.xml -->
-	    </param-value>
-	</context-param>
-	<context-param>
-	    <param-name>log4jConfigLocation</param-name>
-	    <param-value>classpath:log4j.properties</param-value>
-	</context-param>    
-	<listener>
+	<!-- <listener>
 	    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-	</listener>
+	</listener> -->
     <listener>
 	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>

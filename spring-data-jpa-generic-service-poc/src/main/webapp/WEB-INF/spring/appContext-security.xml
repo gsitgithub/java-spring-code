@@ -14,10 +14,11 @@
 	
 	<beans:bean id="authenticationEntryPoint" 
 		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint" >
-		<beans:constructor-arg name="loginFormUrl" value="/accessdenied" />
+		<beans:constructor-arg name="loginFormUrl" value="/login" />
 	</beans:bean>
 	
-	<http auto-config="false" access-denied-page="/accessdenied" use-expressions="true" entry-point-ref="authenticationEntryPoint">
+	<http auto-config="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
+		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/accessdenied" access="permitAll" />
 		<intercept-url pattern="/logout" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />

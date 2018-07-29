@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import dev.gsitgithub.generic.repo.BaseEntity;
+import dev.gsitgithub.generic.api.BaseEntity;
 
 @Entity (name = "Employee")
 @Table(name="EMPLOYEE")

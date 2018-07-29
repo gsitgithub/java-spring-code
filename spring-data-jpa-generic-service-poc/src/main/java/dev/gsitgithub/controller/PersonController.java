@@ -1,8 +1,6 @@
 package dev.gsitgithub.controller;
 
 
-import java.util.List;
-
 import org.boon.json.ObjectMapper;
 import org.boon.json.implementation.ObjectMapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.gsitgithub.generic.repo.specification.Filter;
+import dev.gsitgithub.generic.api.specification.Filter;
 import dev.gsitgithub.service.PersonService;
 
 @RestController
