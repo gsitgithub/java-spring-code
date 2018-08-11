@@ -24,6 +24,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.util.StringUtils;
 
 import dev.gsitgithub.generic.jpa.specification.JoinSpecification;
 import dev.gsitgithub.generic.jpa.specification.SpecificationImpl;
@@ -56,8 +57,10 @@ public class SpecificationBuilder<T> {
     }
 
     public SpecificationBuilder<T> where(String queryString) {
-        Filter filter = Filter.parse(queryString);
-        return where(filter);
+    	if (!StringUtils.hasText(queryString))
+    		return this;
+    	else
+    	    return where(Filter.parse(queryString));
     }
 
     public SpecificationBuilder<T> where(Filter filter) {

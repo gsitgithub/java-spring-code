@@ -57,7 +57,7 @@ public abstract class GenericServiceImpl<T extends BaseEntity, ID extends Serial
 	
 	@Override
 	public List<T> findMany(final int firstResult, int maxResults) {
-		Pageable pageSpecification = new PageRequest(firstResult, maxResults > 0 ? maxResults:NUMBER_OF_PERSONS_PER_PAGE);
+		Pageable pageSpecification = PageRequest.of(firstResult, maxResults > 0 ? maxResults:NUMBER_OF_PERSONS_PER_PAGE);
 		return repository.findAll(pageSpecification).getContent();
 	}
 
@@ -70,7 +70,7 @@ public abstract class GenericServiceImpl<T extends BaseEntity, ID extends Serial
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean isExist(Serializable id) {
-		return repository.exists((ID) id);
+		return repository.existsById((ID) id);
 	}
 
 	@Override
@@ -115,17 +115,17 @@ public abstract class GenericServiceImpl<T extends BaseEntity, ID extends Serial
 
 	@Override
 	public void createMany(Collection<T> newInstances) {
-		repository.save(newInstances);
+		saveMany(newInstances);
 	}
 
 	@Override
 	public void saveMany(Collection<T> instances) {
-		repository.save(instances);
+		repository.saveAll(instances);
 	}
 
 	@Override
 	public void updateMany(Collection<T> instances) {
-		repository.save(instances);
+		saveMany(instances);
 	}
 
 }

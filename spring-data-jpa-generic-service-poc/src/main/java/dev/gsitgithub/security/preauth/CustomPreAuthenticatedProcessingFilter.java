@@ -18,7 +18,7 @@ public class CustomPreAuthenticatedProcessingFilter extends RequestHeaderAuthent
 	CustomUserDetailsService customUserDetailService;*/
     
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, Authentication authResult) {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws IOException, ServletException {
     	response.addHeader(principalRequestHeader, "myvalues");
     	System.out.println("\nsuccessfulAuthentication\n");
     	super.successfulAuthentication(request, response, authResult);
@@ -26,7 +26,7 @@ public class CustomPreAuthenticatedProcessingFilter extends RequestHeaderAuthent
     
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request,
-    		HttpServletResponse response, AuthenticationException failed) {
+    		HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
 		System.out.println("\n unsuccessfulAuthentication \n");
 		super.unsuccessfulAuthentication(request, response, failed);
     }

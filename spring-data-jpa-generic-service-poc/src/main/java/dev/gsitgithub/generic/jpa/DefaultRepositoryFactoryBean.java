@@ -17,13 +17,8 @@ import dev.gsitgithub.generic.api.BaseEntity;
 public class DefaultRepositoryFactoryBean<T extends JpaRepository<S, ID>, S, ID extends Serializable>
 		extends JpaRepositoryFactoryBean<T, S, ID> {
 
-	/*public DefaultRepositoryFactoryBean(Class<? extends T> repositoryInterface) {
-		super(repositoryInterface);
-	}*/
-
 	/**
 	 * Returns a {@link RepositoryFactorySupport}.
-	 *
 	 * @param entityManager
 	 * @return
 	 */
@@ -31,6 +26,10 @@ public class DefaultRepositoryFactoryBean<T extends JpaRepository<S, ID>, S, ID 
 		return new RepositoryFactory(entityManager);
 	}
 
+	public DefaultRepositoryFactoryBean(Class<? extends T> repositoryInterface) {
+		super(repositoryInterface);
+	}
+	
 	private static class RepositoryFactory<T extends BaseEntity, I extends Serializable> extends JpaRepositoryFactory {
 
 		private EntityManager entityManager;
@@ -40,14 +39,14 @@ public class DefaultRepositoryFactoryBean<T extends JpaRepository<S, ID>, S, ID 
 			this.entityManager = entityManager;
 		}
 
-		@Override
+		/*@Override
 		protected Object getTargetRepository(RepositoryMetadata metadata) {
 			return new GenericRepositoryImpl<T, I>((Class<T>) metadata.getDomainType(), entityManager);
-		}
-		/*@Override
+		}*/
+		@Override
 		protected Object getTargetRepository(RepositoryInformation information) {
 			return new GenericRepositoryImpl<T, I>((Class<T>) information.getDomainType(), entityManager);
-		}*/
+		}
 		
 		@Override
 		protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {

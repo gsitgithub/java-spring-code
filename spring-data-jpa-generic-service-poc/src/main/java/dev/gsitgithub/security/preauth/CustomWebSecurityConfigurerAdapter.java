@@ -57,7 +57,6 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import dev.gsitgithub.dao.repo.UrlConfigRepository;
 import dev.gsitgithub.entity.UrlConfig;
 
-
 /* Add @EnableWebSecurity annotation to enable spring security */
 //@EnableWebSecurity
 //@Configuration
@@ -161,7 +160,7 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
 	    entryPoint.setRealmName("AppName Realm");
 	    
 	    // accessDecisionManager
-	    List<AccessDecisionVoter> voters = Arrays.<AccessDecisionVoter>asList(new RoleVoter(), new WebExpressionVoter());
+	    List<AccessDecisionVoter<? extends Object>> voters = Arrays.<AccessDecisionVoter<? extends Object>>asList(new RoleVoter(), new WebExpressionVoter());
 	    AccessDecisionManager accessDecisionManager = new AffirmativeBased(voters);
 	    
 	    // SecurityExpressionHandler

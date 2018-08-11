@@ -22,7 +22,8 @@
         <property name="defaultEncoding" value="UTF-8" />
     </bean>
     
-    <!-- <import resource="appContext-jpa.xml"/> -->
+    <!-- @See web.xml for implementation
+    <import resource="appContext-jpa.xml"/> -->
     
     <!-- <bean id="customFilterDetailsService" class="CustomFilterDetailsService" /> -->
     

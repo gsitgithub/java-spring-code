@@ -12,27 +12,6 @@
     <bean id="propertyConfigurer"
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
         p:location="/WEB-INF/jdbc-development.properties" />
-        
-	<!-- <bean id="configurationBuilder" class="com.vladmihalcea.flexypool.config.Configuration$Builder">
-		<constructor-arg value="uniqueId"/>
-		<constructor-arg ref="poolingDataSource"/>
-		<constructor-arg value="#{ T(com.vladmihalcea.flexypool.adaptor.HikariCPPoolAdapter).FACTORY }"/>
-	</bean>
-	
-	<bean id="configuration" factory-bean="configurationBuilder" factory-method="build"/>
-	<bean id="dataSource" class="com.vladmihalcea.flexypool.FlexyPoolDataSource" init-method="start" destroy-method="stop">
-		<constructor-arg ref="configuration"/>
-		<constructor-arg>
-			<array>
-				<bean class="com.vladmihalcea.flexypool.strategy.IncrementPoolOnTimeoutConnectionAcquiringStrategy.Factory">
-					<constructor-arg value="5"/>
-				</bean>
-				<bean class="com.vladmihalcea.flexypool.strategy.RetryConnectionAcquiringStrategy.Factory">
-					<constructor-arg value="2"/>
-				</bean>
-			</array>
-		</constructor-arg>
-	</bean> -->
 
 	<!-- HikariCP configuration -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
@@ -51,24 +30,31 @@
 	        </props>
 	    </property>
 	</bean>
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	<bean id="poolingDataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 	    <constructor-arg ref="hikariConfig" />
 	</bean>
+        
+	<bean id="configurationBuilder" class="com.vladmihalcea.flexypool.config.Configuration$Builder">
+		<constructor-arg value="uniqueId"/>
+		<constructor-arg ref="poolingDataSource"/>
+		<constructor-arg value="#{ T(com.vladmihalcea.flexypool.adaptor.HikariCPPoolAdapter).FACTORY }"/>
+	</bean>
 	
-<!-- 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="${jdbc.driverClassName}"/>
-        <property name="url" value="${jdbc.databaseurl}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
-        <property name="testOnBorrow" value="true"/>
-        <property name="testOnReturn" value="true"/>
-        <property name="testWhileIdle" value="true"/>
-        <property name="timeBetweenEvictionRunsMillis" value="1800000"/>
-        <property name="numTestsPerEvictionRun" value="3"/>
-        <property name="minEvictableIdleTimeMillis" value="1800000"/>
-        <property name="validationQuery" value="SELECT 1"/>
-    </bean> -->
+	<bean id="configuration" factory-bean="configurationBuilder" factory-method="build"/>
+	<bean id="dataSource" class="com.vladmihalcea.flexypool.FlexyPoolDataSource" init-method="start" destroy-method="stop">
+		<constructor-arg ref="configuration"/>
+		<constructor-arg>
+			<array>
+				<bean class="com.vladmihalcea.flexypool.strategy.IncrementPoolOnTimeoutConnectionAcquiringStrategy.Factory">
+					<constructor-arg value="5"/>
+				</bean>
+				<bean class="com.vladmihalcea.flexypool.strategy.RetryConnectionAcquiringStrategy.Factory">
+					<constructor-arg value="2"/>
+				</bean>
+			</array>
+		</constructor-arg>
+	</bean>
+	
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <!-- <property name="persistenceUnitName" value="persistenceUnit"/> -->
         <property name="dataSource" ref="dataSource"/>
@@ -89,6 +75,25 @@
             </props>
         </property>
     </bean>
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!-- <property name="configLocation" value="classpath:hibernate.cfg.xml" /> OR -->
+        <!-- <property name="packagesToScan" value="dev.gsitgithub.entity" /> -->
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${jdbc.dialect}</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+            </props>
+        </property>
+    </bean>
+    
+	<!-- class="org.springframework.orm.hibernate3.HibernateTransactionManager"> for Hibernate 3.x
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean> -->
+    
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
@@ -97,37 +102,10 @@
     
     <!-- For the @PersistenceContext EntityManager entityManager; approach -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
-<!--     <tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/> -->
+	<!-- <tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/> -->
     
    	<jpa:repositories base-package="dev.gsitgithub.dao.repo"
 		factory-class="dev.gsitgithub.generic.jpa.DefaultRepositoryFactoryBean"/>
-		
-	   
-<!--     <bean id="dataSource"
-        class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
-        p:driverClassName="${jdbc.driverClassName}"
-        p:url="${jdbc.databaseurl}" p:username="${jdbc.username}"
-        p:password="${jdbc.password}" />
- 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">  for Hibernate 3.x
-        <property name="dataSource" ref="dataSource" />
-        <property name="configLocation" value="classpath:hibernate.cfg.xml" />
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">${jdbc.dialect}</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-            </props>
-        </property>
-        <property name="schemaUpdate" value="true"></property>
-    </bean>
-    
-    <tx:annotation-driven />
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        class="org.springframework.orm.hibernate3.HibernateTransactionManager"> for Hibernate 3.x
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean> -->
 
 <!-- 	<bean id="employeeDAO" class="EmployeeDaoImpl" />
     <bean id="employeeManager" class="EmployeeManagerImpl" />
