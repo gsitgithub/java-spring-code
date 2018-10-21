@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean;
+import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.core.RepositoryInformation;
 import org.springframework.data.repository.core.RepositoryMetadata;
@@ -39,12 +40,8 @@ public class DefaultRepositoryFactoryBean<T extends JpaRepository<S, ID>, S, ID 
 			this.entityManager = entityManager;
 		}
 
-		/*@Override
-		protected Object getTargetRepository(RepositoryMetadata metadata) {
-			return new GenericRepositoryImpl<T, I>((Class<T>) metadata.getDomainType(), entityManager);
-		}*/
 		@Override
-		protected Object getTargetRepository(RepositoryInformation information) {
+		protected JpaRepositoryImplementation<?, ?> getTargetRepository(RepositoryInformation information, EntityManager entityManager) {
 			return new GenericRepositoryImpl<T, I>((Class<T>) information.getDomainType(), entityManager);
 		}
 		

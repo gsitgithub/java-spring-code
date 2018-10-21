@@ -1,6 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+     <groupId>dev.gsitgithub</groupId>
+    <artifactId>parent-pom</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
   <groupId>dev.gsitgithub</groupId>
   <artifactId>generic-data-jpa</artifactId>
   <packaging>war</packaging>
@@ -18,7 +23,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <javaee-api.version>8.0</javaee-api.version>
+        <!-- <javaee-api.version>8.0</javaee-api.version>
         <javaee-web-api.version>8.0</javaee-web-api.version>
 
         <spring.version>5.0.8.RELEASE</spring.version>
@@ -32,6 +37,7 @@
         <log4j.version>2.11.1</log4j.version>
         
         <junit-jupiter-api.version>5.2.0</junit-jupiter-api.version>
+		-->
     </properties>
     
     <profiles>
@@ -74,13 +80,13 @@
     <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-framework-bom</artifactId>
-        <version>${spring.version}</version>
         <type>pom</type>
+		<version>${spring.version}</version>
+		<!--  <scope></scope> [provided, compile, runtime, test, system] -->
     </dependency>
     <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-core</artifactId>
-        <version>${spring.version}</version>
     </dependency>
     <!--
         Expression Language (depends on spring-core)
@@ -89,7 +95,6 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-expression</artifactId>
-      <version>${spring.version}</version>
     </dependency>
     <!--
         Bean Factory and JavaBeans utilities (depends on spring-core)
@@ -98,7 +103,6 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
-      <version>${spring.version}</version>
     </dependency>
     <!--
         Application Context (depends on spring-core, spring-expression, spring-aop, spring-beans)
@@ -107,7 +111,6 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>${spring.version}</version>
     </dependency>
      
     <!-- Persistence Start -->
@@ -119,7 +122,6 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
-      <version>${spring.version}</version>
     </dependency>
     <!--
         JDBC Data Access Library (depends on spring-core, spring-beans, spring-context, spring-tx)
@@ -128,7 +130,6 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
-      <version>${spring.version}</version>
     </dependency>
     <!--
         Object-to-Relation-Mapping (ORM) integration with Hibernate, JPA, and iBatis.
@@ -138,13 +139,11 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-orm</artifactId>
-      <version>${spring.version}</version>
     </dependency>
     <!-- Spring data jpa support using Hibernate start -->
     <dependency>
         <groupId>org.springframework.data</groupId>
         <artifactId>spring-data-jpa</artifactId>
-        <version>${spring.data.version}</version>
     </dependency>
     <!-- <dependency>
         <groupId>org.eclipse.persistence</groupId>
@@ -478,25 +477,21 @@
      <dependency>
          <groupId>org.apache.logging.log4j</groupId>
          <artifactId>log4j-api</artifactId>
-         <version>${log4j.version}</version>
          <scope>compile</scope>
      </dependency>
      <dependency>
          <groupId>org.apache.logging.log4j</groupId>
          <artifactId>log4j-core</artifactId>
-         <version>${log4j.version}</version>
          <scope>runtime</scope>
      </dependency>
      <dependency>
          <groupId>org.apache.logging.log4j</groupId>
          <artifactId>log4j-slf4j-impl</artifactId>
-         <version>${log4j.version}</version>
          <scope>runtime</scope>
      </dependency>
      <dependency>
          <groupId>org.apache.logging.log4j</groupId>
          <artifactId>log4j-taglib</artifactId>
-         <version>${log4j.version}</version>
          <scope>runtime</scope>
      </dependency>
      
